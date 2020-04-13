@@ -1,0 +1,9 @@
+/.idea/
+/vendor/
+/phpunit.xml
+/config/*.pem
+/bin/*
+/logs/*.log
+/logs/*.xml
+/*.lock
+.env.local
