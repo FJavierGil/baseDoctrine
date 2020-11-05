@@ -5,7 +5,7 @@
  * src/Utility/Utils.php
  */
 
-namespace TDW\DemoDoctrine\Utility;
+namespace MiW\DemoDoctrine\Utility;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,20 +19,18 @@ trait Utils
     /**
      * Generate the Entity Manager
      *
-     * @return EntityManagerInterface
+     * @return null|EntityManagerInterface
      */
-    public static function getEntityManager(): EntityManagerInterface
+    public static function getEntityManager(): ?EntityManagerInterface
     {
-        if (
-            !isset(
-                $_ENV['DATABASE_NAME'],
-                $_ENV['DATABASE_USER'],
-                $_ENV['DATABASE_PASSWD'],
-                $_ENV['ENTITY_DIR']
-            )
-        ) {
+        if (!isset(
+            $_ENV['DATABASE_NAME'],
+            $_ENV['DATABASE_USER'],
+            $_ENV['DATABASE_PASSWD'],
+            $_ENV['ENTITY_DIR']
+        )) {
             fwrite(STDERR, 'Faltan variables de entorno por definir' . PHP_EOL);
-            exit(1);
+            die(1);
         }
 
         // Cargar configuración de la conexión
@@ -50,7 +48,7 @@ trait Utils
         $entityDir = dirname(__DIR__, 2) . $_ENV['ENTITY_DIR'];
         $config = Setup::createAnnotationMetadataConfiguration(
             [ $entityDir ],            // paths to mapped entities
-            $debug,   // developper mode
+            $debug,                    // developper mode
             ini_get('sys_temp_dir'),   // Proxy dir
             null,                      // Cache implementation
             false                      // use Simple Annotation Reader
@@ -65,7 +63,7 @@ trait Utils
         } catch (\Throwable $e) {
             $msg = sprintf('ERROR (%d): %s', $e->getCode(), $e->getMessage());
             fwrite(STDERR, $msg . PHP_EOL);
-            exit(1);
+            die(1);
         }
 
         return $entityManager;
@@ -79,29 +77,34 @@ trait Utils
      */
     public static function loadEnv(string $dir): void
     {
+        /** @noinspection PhpIncludeInspection */
         require_once $dir . '/vendor/autoload.php';
 
         if (!class_exists(\Dotenv\Dotenv::class)) {
-            fwrite(STDERR, 'ERROR: No se ha cargado la clase DotENV' . PHP_EOL);
-            exit(1);
+            fwrite(STDERR, 'ERROR: No se ha cargado la clase Dotenv' . PHP_EOL);
+            die(1);
         }
 
-        // Load environment variables from .env file
-        if (file_exists($dir . '/.env')) {
-            $dotenv = \Dotenv\Dotenv::createMutable($dir, '.env');
-            $dotenv->load();
-        } else {
-            fwrite(STDERR, 'ERROR: no existe el fichero .env' . PHP_EOL);
-            exit(1);
-        }
+        try {
+            // Load environment variables from .env file
+            if (file_exists($dir . '/.env')) {
+                $dotenv = \Dotenv\Dotenv::createMutable($dir, '.env');
+                $dotenv->load();
+            } else {
+                fwrite(STDERR, 'ERROR: no existe el fichero .env' . PHP_EOL);
+                die(1);
+            }
 
-        // Overload (if they exist) with .env.docker or .env.local
-        if (isset($_SERVER['DOCKER'])) {
-            $dotenv = \Dotenv\Dotenv::createMutable($dir, '.env.docker');
-            $dotenv->load();
-        } elseif (file_exists($dir . '/.env.local')) {
-            $dotenv = \Dotenv\Dotenv::createMutable($dir, '.env.local');
-            $dotenv->load();
+            // Overload (if they exist) with .env.docker or .env.local
+            if (filter_has_var(INPUT_SERVER, 'DOCKER') && file_exists($dir . '/.env.docker')) {
+                $dotenv = \Dotenv\Dotenv::createMutable($dir, '.env.docker');
+                $dotenv->load();
+            } elseif (file_exists($dir . '/.env.local')) {
+                $dotenv = \Dotenv\Dotenv::createMutable($dir, '.env.local');
+                $dotenv->load();
+            }
+        } catch (\Throwable $e) {
+            die(get_class($e) . ': ' . $e->getMessage() . PHP_EOL);
         }
     }
 }

@@ -5,11 +5,11 @@
  * ./config/cli-config.php
  *
  * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://www.etsisi.upm.es ETS de Ingeniería de Sistemas Informáticos
+ * @link     http://miw.etsisi.upm.es E.T.S. de Ingeniería de Sistemas Informáticos
  */
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use TDW\DemoDoctrine\Utility\Utils;
+use MiW\DemoDoctrine\Utility\Utils;
 
 // Load env variables from .env + (.docker || .local )
 Utils::loadEnv(dirname(__DIR__));

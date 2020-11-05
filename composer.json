@@ -1,21 +1,21 @@
 {
-    "name": "tdw/demo-doctrine",
+    "name": "miw/base-doctrine",
     "type": "project",
-    "description": "UPM - TDW - Demo ORM Doctrine",
+    "description": "UPM - MiW - Base ORM Doctrine",
     "license": "MIT",
-    "homepage": "http://www.etsisi.upm.es/",
+    "homepage": "http://miw.etsisi.upm.es/",
     "keywords": ["php", "doctrine-orm"],
     "authors": [
         {
-            "name": "TDW UPM",
-            "homepage": "http://www.etsisi.upm.es/",
+            "name": "MiW UPM",
+            "homepage": "http://miw.etsisi.upm.es/",
             "email": "miw.etsisi@upm.es",
             "role": "Developer"
         }
     ],
     "autoload": {
         "psr-4": {
-            "TDW\\DemoDoctrine\\": "src/"
+            "MiW\\DemoDoctrine\\": "src/"
         }
     },
     "require": {
@@ -24,15 +24,12 @@
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "doctrine/orm": "^2.7",
-        "vlucas/phpdotenv": "^4.1"
+        "vlucas/phpdotenv": "^5.2"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
     },
     "config": {
         "bin-dir": "bin"
-    },
-    "scripts": {
-        "start": "php -S 127.0.0.1:8000 -t public"
     }
 }
