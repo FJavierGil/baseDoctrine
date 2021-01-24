@@ -23,8 +23,8 @@
         "ext-json": "*",
         "ext-mysqli": "*",
         "ext-pdo": "*",
-        "doctrine/orm": "^2.7",
-        "vlucas/phpdotenv": "^5.2"
+        "doctrine/orm": "^2.8",
+        "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"

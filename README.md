@@ -51,7 +51,7 @@ A continuación se describe el contenido y estructura del proyecto:
 * Directorio `src`:
     - Subdirectorio `src/Entity`: entidades PHP (incluyen anotaciones de mapeo del ORM)
     - Subdirectorio `src/scripts`: scripts de ejemplo
-    - Subdirectorio `src/Utility`: trait Utils (proporciona el gestor de entidades)
+    - Subdirectorio `src/Utility`: clase DoctrineConnector y trait Utils (proporciona el gestor de entidades)
 * Directorio `vendor`:
     - Componentes desarrollados por terceros (Doctrine, Dotenv, etc.)
 
