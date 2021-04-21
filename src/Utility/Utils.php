@@ -30,7 +30,7 @@ trait Utils
 
         if (!class_exists(Dotenv::class)) {
             fwrite(STDERR, 'ERROR: No se ha cargado la clase Dotenv' . PHP_EOL);
-            die(1);
+            exit(1);
         }
 
         try {
@@ -40,7 +40,7 @@ trait Utils
                 $dotenv->load();
             } else {
                 fwrite(STDERR, 'ERROR: no existe el fichero .env' . PHP_EOL);
-                die(1);
+                exit(1);
             }
 
             // Overload (if they exist) with .env.docker or .env.local
@@ -52,7 +52,8 @@ trait Utils
                 $dotenv->load();
             }
         } catch (Throwable $e) {
-            die(get_class($e) . ': ' . $e->getMessage() . PHP_EOL);
+            fwrite(STDERR, 'EXCEPCIÓN: ' . $e->getCode() . ' - ' . $e->getMessage());
+            exit(1);
         }
     }
 }
