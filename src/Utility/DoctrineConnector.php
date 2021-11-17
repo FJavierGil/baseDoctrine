@@ -56,18 +56,14 @@ final class DoctrineConnector
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
-        $debug = $_ENV['DEBUG'] ?? false;
         $config = Setup::createAnnotationMetadataConfiguration(
             [ $entityDir ],            // paths to mapped entities
-            $debug,                    // developper mode
+            false,                     // developper mode
             ini_get('sys_temp_dir'),   // Proxy dir
             null,                      // Cache implementation
             false                      // use Simple Annotation Reader
         );
         $config->setAutoGenerateProxyClasses(true);
-        if ($debug) {
-            $config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
-        }
 
         try {
             $entityManager = EntityManager::create($dbParams, $config);
