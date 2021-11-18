@@ -58,10 +58,10 @@ final class DoctrineConnector
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
         $config = Setup::createAnnotationMetadataConfiguration(
             [ $entityDir ],            // paths to mapped entities
-            false,                     // developper mode
-            ini_get('sys_temp_dir'),   // Proxy dir
-            null,                      // Cache implementation
-            false                      // use Simple Annotation Reader
+            false,                      // developper mode
+            ini_get('sys_temp_dir'),    // Proxy dir
+            null,                       // Cache implementation
+            false                       // use Simple Annotation Reader
         );
         $config->setAutoGenerateProxyClasses(true);
 

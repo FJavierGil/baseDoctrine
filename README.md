@@ -4,7 +4,7 @@ MiW: base Doctrine
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%5E7.4-blue.svg)](http://php.net/)
 [![Scrutinizer analysis results](https://scrutinizer-ci.com/g/FJavierGil/baseDoctrine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/FJavierGil/baseDoctrine/?branch=master)
-> Proyecto básico con ORM Doctrine y Dotenv
+> 🎯 Proyecto básico con ORM Doctrine y Dotenv
 
 Este proyecto pretende servir como base para hacer más sencilla la gestión de datos en PHP.
 En concreto, se ha utilizado el ORM [Doctrine][doctrine], que es un Object-Relational
@@ -17,7 +17,7 @@ su configuración a través de variables de entorno. Esto permite que cualquier 
 que pueda variar entre diferentes entornos pueda ser establecida en variables de entorno,
 tal como se aconseja en la metodología [“The twelve-factor app”][12factor].
 
-## Instalación de la aplicación
+## 🛠️ Instalación de la aplicación
 
 Para realizar la instalación de la aplicación crearán un usuario, contraseña y base de datos
 en el SGBD. A continuación se debe crear una copia del fichero `./.env` y renombrarla
@@ -40,7 +40,7 @@ Para comprobar la validez de la información de mapeo y la sincronización con l
 $> bin/doctrine orm:validate-schema
 ```
 
-##Estructura del proyecto:
+## 🗄️ Estructura del proyecto:
 
 A continuación se describe el contenido y estructura del proyecto:
 
