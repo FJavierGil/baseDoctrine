@@ -13,9 +13,9 @@ use Dotenv\Dotenv;
 use Throwable;
 
 /**
- * Trait Utils
+ * Class Utils
  */
-trait Utils
+class Utils
 {
     /**
      * Load the environment/configuration variables

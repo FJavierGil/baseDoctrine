@@ -24,7 +24,7 @@
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "doctrine/orm": "^2.10",
-        "symfony/cache": "^5.3",
+        "symfony/cache": "^5.4",
         "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
