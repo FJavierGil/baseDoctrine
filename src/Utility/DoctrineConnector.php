@@ -3,8 +3,8 @@
 /**
  * src/Utility/DoctrineConnector.php
  *
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://www.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
+ * @license https://opensource.org/licenses/MIT MIT License
+ * @link    http://www.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
  */
 
 namespace MiW\DemoDoctrine\Utility;
@@ -19,14 +19,16 @@ use Throwable;
  */
 final class DoctrineConnector
 {
+
+    /** @var EntityManager|null instance member variable */
     private static ?EntityManager $instance = null;
 
     /**
      * Generate the Entity Manager
      *
-     * @return EntityManagerInterface
+     * @return EntityManagerInterface|null
      */
-    public static function getEntityManager(): EntityManagerInterface
+    public static function getEntityManager(): ?EntityManagerInterface
     {
         if (null !== self::$instance) {
             return self::$instance;
@@ -44,7 +46,7 @@ final class DoctrineConnector
             exit(1);
         }
 
-        // Cargar configuración de la conexión
+        // Cargar configuración de la conexión.
         $dbParams = [
             'host'      => $_ENV['DATABASE_HOST'] ?? '127.0.0.1',
             'port'      => $_ENV['DATABASE_PORT'] ?? 3306,
@@ -57,11 +59,11 @@ final class DoctrineConnector
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
         $config = Setup::createAnnotationMetadataConfiguration(
-            [ $entityDir ],            // paths to mapped entities
-            false,                      // developper mode
+            [ $entityDir ],            // Paths to mapped entities
+            false,                      // Developper mode
             ini_get('sys_temp_dir'),    // Proxy dir
             null,                       // Cache implementation
-            false                       // use Simple Annotation Reader
+            false                       // Use Simple Annotation Reader
         );
         $config->setAutoGenerateProxyClasses(true);
 

@@ -3,8 +3,8 @@
 /**
  * src/Utility/Utils.php
  *
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://www.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
+ * @license https://opensource.org/licenses/MIT MIT License
+ * @link    http://www.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
  */
 
 namespace MiW\DemoDoctrine\Utility;

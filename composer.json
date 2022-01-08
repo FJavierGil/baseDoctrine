@@ -19,18 +19,21 @@
         }
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-json": "*",
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "doctrine/orm": "^2.10",
-        "symfony/cache": "^5.4",
+        "symfony/cache": "^6.0",
         "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     }
 }

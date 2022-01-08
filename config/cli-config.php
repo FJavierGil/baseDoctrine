@@ -3,8 +3,8 @@
 /**
  * ./config/cli-config.php
  *
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://miw.etsisi.upm.es E.T.S. de Ingeniería de Sistemas Informáticos
+ * @license https://opensource.org/licenses/MIT MIT License
+ * @link    http://miw.etsisi.upm.es E.T.S. de Ingeniería de Sistemas Informáticos
  */
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
