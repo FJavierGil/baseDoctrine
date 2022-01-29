@@ -19,11 +19,12 @@
         }
     },
     "require": {
-        "php": ">=8.0",
+        "php": "^8.0.2",
         "ext-json": "*",
         "ext-mysqli": "*",
         "ext-pdo": "*",
-        "doctrine/orm": "^2.10",
+        "doctrine/annotations": "^1.13",
+        "doctrine/orm": "^2.11",
         "symfony/cache": "^6.0",
         "vlucas/phpdotenv": "^5.4"
     },
