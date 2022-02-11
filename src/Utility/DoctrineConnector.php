@@ -12,6 +12,7 @@ namespace MiW\DemoDoctrine\Utility;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Setup;
+use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Throwable;
 
 /**
@@ -19,8 +20,6 @@ use Throwable;
  */
 final class DoctrineConnector
 {
-
-    /** @var EntityManager|null instance member variable */
     private static ?EntityManager $instance = null;
 
     /**
@@ -58,6 +57,8 @@ final class DoctrineConnector
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
+        $queryCache = new PhpFilesAdapter('doctrine_queries');
+        $metadataCache = new PhpFilesAdapter('doctrine_metadata');
         $config = Setup::createAnnotationMetadataConfiguration(
             [ $entityDir ],            // Paths to mapped entities
             false,                      // Developper mode
@@ -65,6 +66,8 @@ final class DoctrineConnector
             null,                       // Cache implementation
             false                       // Use Simple Annotation Reader
         );
+        $config->setQueryCache($queryCache);
+        $config->setMetadataCache($metadataCache);
         $config->setAutoGenerateProxyClasses(true);
 
         try {
