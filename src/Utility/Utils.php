@@ -44,7 +44,7 @@ class Utils
             }
 
             // Overload (if they exist) with .env.docker or .env.local
-            if (filter_has_var(INPUT_SERVER, 'DOCKER') && file_exists($dir . '/.env.docker')) {
+            if (isset($_SERVER['DOCKER']) && file_exists($dir . '/.env.docker')) {
                 $dotenv = Dotenv::createMutable($dir, '.env.docker');
                 $dotenv->load();
             } elseif (file_exists($dir . '/.env.local')) {
