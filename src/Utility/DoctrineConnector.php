@@ -58,17 +58,17 @@ final class DoctrineConnector
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
         $queryCache = new PhpFilesAdapter('doctrine_queries');
-        $metadataCache = new PhpFilesAdapter('doctrine_metadata');
+        // $metadataCache = new PhpFilesAdapter('doctrine_metadata');
         $config = Setup::createAnnotationMetadataConfiguration(
             [ $entityDir ],            // Paths to mapped entities
-            false,                      // Developper mode
+            true,                       // Developper mode
             ini_get('sys_temp_dir'),    // Proxy dir
             null,                       // Cache implementation
             false                       // Use Simple Annotation Reader
         );
         $config->setQueryCache($queryCache);
-        $config->setMetadataCache($metadataCache);
-        $config->setAutoGenerateProxyClasses(true);
+        // $config->setMetadataCache($metadataCache);
+        // $config->setAutoGenerateProxyClasses(true);
 
         try {
             $entityManager = EntityManager::create($dbParams, $config);
