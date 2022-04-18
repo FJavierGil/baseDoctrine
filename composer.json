@@ -4,7 +4,7 @@
     "description": "UPM - MiW - Base ORM Doctrine",
     "license": "MIT",
     "homepage": "http://miw.etsisi.upm.es/",
-    "keywords": ["php", "doctrine-orm"],
+    "keywords": ["php", "doctrine-orm", "dotenv"],
     "authors": [
         {
             "name": "MiW UPM",
