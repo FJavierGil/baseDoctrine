@@ -8,6 +8,7 @@
  */
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use MiW\DemoDoctrine\Utility\DoctrineConnector;
 use MiW\DemoDoctrine\Utility\Utils;
 
@@ -16,4 +17,4 @@ Utils::loadEnv(dirname(__DIR__));
 
 $entityManager = DoctrineConnector::getEntityManager();
 
-return ConsoleRunner::createHelperSet($entityManager);
+ConsoleRunner::run(new SingleManagerProvider($entityManager));

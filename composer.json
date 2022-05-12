@@ -24,7 +24,8 @@
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "doctrine/annotations": "^1.13",
-        "doctrine/orm": "^2.11",
+        "doctrine/dbal": "^3.3",
+        "doctrine/orm": "^2.12",
         "symfony/cache": "^6.0",
         "vlucas/phpdotenv": "^5.4"
     },

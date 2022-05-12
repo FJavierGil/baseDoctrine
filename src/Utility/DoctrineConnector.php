@@ -9,9 +9,10 @@
 
 namespace MiW\DemoDoctrine\Utility;
 
+use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\ORMSetup;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Throwable;
 
@@ -57,18 +58,22 @@ final class DoctrineConnector
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
-        $queryCache = new PhpFilesAdapter('doctrine_queries');
-        // $metadataCache = new PhpFilesAdapter('doctrine_metadata');
-        $config = Setup::createAnnotationMetadataConfiguration(
-            [ $entityDir ],            // Paths to mapped entities
-            true,                       // Developper mode
-            ini_get('sys_temp_dir'),    // Proxy dir
-            null,                       // Cache implementation
-            false                       // Use Simple Annotation Reader
+        $debug = $_ENV['DEBUG'] ?? false;
+        // $queryCache = new PhpFilesAdapter('doctrine_queries');
+        $metadataCache = new PhpFilesAdapter('doctrine_metadata');
+        // $resultsCache = new PhpFilesAdapter('doctrine_results');
+        $config = ORMSetup::createAnnotationMetadataConfiguration(
+            [ $entityDir ],            // paths to mapped entities
+            true,                      // developper mode
+            ini_get('sys_temp_dir')   // Proxy dir
         );
-        $config->setQueryCache($queryCache);
-        // $config->setMetadataCache($metadataCache);
-        // $config->setAutoGenerateProxyClasses(true);
+        // $config->setQueryCache($queryCache);
+        $config->setMetadataCache($metadataCache);
+        // $config->setResultCache($resultsCache);
+        $config->setAutoGenerateProxyClasses(AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
+        if ($debug) {
+            $config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
+        }
 
         try {
             $entityManager = EntityManager::create($dbParams, $config);
