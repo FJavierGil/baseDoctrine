@@ -4,7 +4,7 @@
  * src/Utility/Utils.php
  *
  * @license https://opensource.org/licenses/MIT MIT License
- * @link    http://www.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
+ * @link    https://miw.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
  */
 
 namespace MiW\DemoDoctrine\Utility;
@@ -52,7 +52,10 @@ class Utils
                 $dotenv->load();
             }
         } catch (Throwable $e) {
-            fwrite(STDERR, 'EXCEPCIÓN: ' . $e->getCode() . ' - ' . $e->getMessage());
+            fwrite(
+                STDERR,
+                'EXCEPCIÓN: ' . $e->getCode() . ' - ' . $e->getMessage()
+            );
             exit(1);
         }
     }

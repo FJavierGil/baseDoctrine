@@ -4,7 +4,7 @@
  * src/Utility/DoctrineConnector.php
  *
  * @license https://opensource.org/licenses/MIT MIT License
- * @link    http://www.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
+ * @link    https://miw.etsisi.upm.es/ ETS de Ingeniería de Sistemas Informáticos
  */
 
 namespace MiW\DemoDoctrine\Utility;
@@ -21,7 +21,7 @@ use Throwable;
  */
 final class DoctrineConnector
 {
-    private static ?EntityManager $instance = null;
+    private static EntityManager|null $instance = null;
 
     /**
      * Generate the Entity Manager
@@ -30,7 +30,7 @@ final class DoctrineConnector
      */
     public static function getEntityManager(): ?EntityManagerInterface
     {
-        if (null !== self::$instance) {
+        if (self::$instance instanceof EntityManager) {
             return self::$instance;
         }
 
@@ -58,22 +58,22 @@ final class DoctrineConnector
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
-        $debug = $_ENV['DEBUG'] ?? false;
-        // $queryCache = new PhpFilesAdapter('doctrine_queries');
-        $metadataCache = new PhpFilesAdapter('doctrine_metadata');
-        // $resultsCache = new PhpFilesAdapter('doctrine_results');
-        $config = ORMSetup::createAnnotationMetadataConfiguration(
+        // $debug = $_ENV['DEBUG'] ?? false;
+        $queryCache = new PhpFilesAdapter('doctrine_queries');
+        // $metadataCache = new PhpFilesAdapter('doctrine_metadata');
+        $resultsCache = new PhpFilesAdapter('doctrine_results');
+        $config = ORMSetup::createAttributeMetadataConfiguration(
             [ $entityDir ],            // paths to mapped entities
             true,                      // developper mode
             ini_get('sys_temp_dir')   // Proxy dir
         );
-        // $config->setQueryCache($queryCache);
-        $config->setMetadataCache($metadataCache);
-        // $config->setResultCache($resultsCache);
+        $config->setQueryCache($queryCache);
+        // $config->setMetadataCache($metadataCache);
+        $config->setResultCache($resultsCache);
         $config->setAutoGenerateProxyClasses(AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
-        if ($debug) {
-            $config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
-        }
+        // if ($debug) {
+        //     $config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
+        // }
 
         try {
             $entityManager = EntityManager::create($dbParams, $config);

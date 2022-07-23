@@ -49,7 +49,7 @@ A continuación se describe el contenido y estructura del proyecto:
 * Directorio `config`:
     - `cli-config.php`: configuración de la consola de comandos de Doctrine CLI
 * Directorio `src`:
-    - Subdirectorio `src/Entity`: entidades PHP (incluyen anotaciones de mapeo del ORM)
+    - Subdirectorio `src/Entity`: entidades PHP (incluyen **ATRIBUTOS** de mapeo del ORM)
     - Subdirectorio `src/scripts`: scripts de ejemplo
     - Subdirectorio `src/Utility`: clases DoctrineConnector y Utils (proporcionan el gestor de entidades)
 * Directorio `vendor`:

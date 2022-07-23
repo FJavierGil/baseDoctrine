@@ -4,7 +4,7 @@
  * ./config/cli-config.php
  *
  * @license https://opensource.org/licenses/MIT MIT License
- * @link    http://miw.etsisi.upm.es E.T.S. de Ingeniería de Sistemas Informáticos
+ * @link    https://miw.etsisi.upm.es E.T.S. de Ingeniería de Sistemas Informáticos
  */
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
@@ -17,4 +17,12 @@ Utils::loadEnv(dirname(__DIR__));
 
 $entityManager = DoctrineConnector::getEntityManager();
 
-ConsoleRunner::run(new SingleManagerProvider($entityManager));
+$commands = [
+    // If you want to add your own custom console commands,
+    // you can do so here.
+];
+
+ConsoleRunner::run(
+    new SingleManagerProvider($entityManager),
+    $commands
+);
