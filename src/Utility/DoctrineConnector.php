@@ -13,6 +13,7 @@ use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
+use Exception;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Throwable;
 
@@ -90,11 +91,15 @@ final class DoctrineConnector
     {
     }
 
-    private function __clone()
+    protected function __clone()
     {
     }
 
-//    private function __wakeup()
-//    {
-//    }
+    /**
+     * @throws Exception
+     */
+    public function __wakeup()
+    {
+        throw new Exception("Cannot unserialize a Singleton.");
+    }
 }
