@@ -3,12 +3,12 @@
     "type": "project",
     "description": "UPM - MiW - Base ORM Doctrine",
     "license": "MIT",
-    "homepage": "http://miw.etsisi.upm.es/",
+    "homepage": "https://miw.etsisi.upm.es/",
     "keywords": ["php", "doctrine-orm", "dotenv"],
     "authors": [
         {
             "name": "MiW UPM",
-            "homepage": "http://miw.etsisi.upm.es/",
+            "homepage": "https://miw.etsisi.upm.es/",
             "email": "miw.etsisi@upm.es",
             "role": "Developer"
         }
@@ -24,10 +24,9 @@
         "ext-mysqli": "*",
         "ext-pdo": "*",
         "doctrine/annotations": "^1.13",
-        "doctrine/dbal": "^3.3",
-        "doctrine/orm": "^2.12",
+        "doctrine/orm": "^2.13",
         "symfony/cache": "^6.1",
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"

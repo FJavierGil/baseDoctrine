@@ -15,7 +15,7 @@ persistencia de los datos en los sistemas de gestión de bases de datos (SGBD).
 Adicionalmente, este proyecto se apoya en el componente [Dotenv][dotenv] para facilitar
 su configuración a través de variables de entorno. Esto permite que cualquier configuración
 que pueda variar entre diferentes entornos pueda ser establecida en variables de entorno,
-tal como se aconseja en la metodología [“The twelve-factor app”][12factor].
+tal como se aconseja en la metodología [“The twelve-factor app”][12factor] ✅.
 
 ## 🛠️ Instalación de la aplicación
 
@@ -49,7 +49,7 @@ A continuación se describe el contenido y estructura del proyecto:
 * Directorio `config`:
     - `cli-config.php`: configuración de la consola de comandos de Doctrine CLI
 * Directorio `src`:
-    - Subdirectorio `src/Entity`: entidades PHP (incluyen **ATRIBUTOS** de mapeo del ORM)
+    - Subdirectorio `src/Entity`: entidades PHP (incluirán **ATRIBUTOS** de mapeo del ORM)
     - Subdirectorio `src/scripts`: scripts de ejemplo
     - Subdirectorio `src/Utility`: clases DoctrineConnector y Utils (proporcionan el gestor de entidades)
 * Directorio `vendor`:
