@@ -10,9 +10,7 @@
 namespace MiW\DemoDoctrine\Utility;
 
 use Doctrine\Common\Proxy\AbstractProxyFactory;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMSetup;
+use Doctrine\{ORM, DBAL};
 use Exception;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Throwable;
@@ -22,16 +20,16 @@ use Throwable;
  */
 final class DoctrineConnector
 {
-    private static EntityManager|null $instance = null;
+    private static ORM\EntityManager|null $instance = null;
 
     /**
      * Generate the Entity Manager
      *
-     * @return EntityManagerInterface|null
+     * @return ORM\EntityManagerInterface|null
      */
-    public static function getEntityManager(): ?EntityManagerInterface
+    public static function getEntityManager(): ?ORM\EntityManagerInterface
     {
-        if (self::$instance instanceof EntityManager) {
+        if (self::$instance instanceof ORM\EntityManager) {
             return self::$instance;
         }
 
@@ -63,10 +61,10 @@ final class DoctrineConnector
         $queryCache = new PhpFilesAdapter('doctrine_queries');
         // $metadataCache = new PhpFilesAdapter('doctrine_metadata');
         $resultsCache = new PhpFilesAdapter('doctrine_results');
-        $config = ORMSetup::createAttributeMetadataConfiguration(
+        $config = ORM\ORMSetup::createAttributeMetadataConfiguration(
             [ $entityDir ],            // paths to mapped entities
             true,                      // developper mode
-            ini_get('sys_temp_dir')   // Proxy dir
+            (string) ini_get('sys_temp_dir')   // Proxy dir
         );
         $config->setQueryCache($queryCache);
         // $config->setMetadataCache($metadataCache);
@@ -77,7 +75,8 @@ final class DoctrineConnector
         // }
 
         try {
-            $entityManager = EntityManager::create($dbParams, $config);
+            $connection = DBAL\DriverManager::getConnection($dbParams, $config);
+            $entityManager = new ORM\EntityManager($connection, $config);
         } catch (Throwable $e) {
             $msg = sprintf('ERROR (%d): %s', $e->getCode(), $e->getMessage());
             fwrite(STDERR, $msg . PHP_EOL);

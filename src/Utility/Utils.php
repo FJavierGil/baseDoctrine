@@ -25,7 +25,6 @@ class Utils
      */
     public static function loadEnv(string $dir): void
     {
-        /** @noinspection PhpIncludeInspection */
         require_once $dir . '/vendor/autoload.php';
 
         if (!class_exists(Dotenv::class)) {

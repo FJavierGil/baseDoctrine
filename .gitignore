@@ -3,7 +3,6 @@
 /phpunit.xml
 /config/*.pem
 /bin/*
-/logs/*.log
-/logs/*.xml
+/var
 /*.lock
 .env.local

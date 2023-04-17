@@ -23,10 +23,10 @@
         "ext-json": "*",
         "ext-mysqli": "*",
         "ext-pdo": "*",
-        "doctrine/annotations": "^1.13",
-        "doctrine/orm": "^2.13",
-        "symfony/cache": "^6.1",
-        "vlucas/phpdotenv": "^5.5"
+        "doctrine/annotations": "^2.0",
+        "doctrine/orm": "^2.17",
+        "symfony/cache": "^6.3",
+        "vlucas/phpdotenv": "^5.6"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
