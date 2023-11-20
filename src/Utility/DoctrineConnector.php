@@ -20,7 +20,7 @@ use Throwable;
  */
 final class DoctrineConnector
 {
-    private static ORM\EntityManager|null $instance = null;
+    private static ORM\EntityManager | null $instance = null;
 
     /**
      * Generate the Entity Manager
@@ -69,13 +69,13 @@ final class DoctrineConnector
         $config->setQueryCache($queryCache);
         // $config->setMetadataCache($metadataCache);
         $config->setResultCache($resultsCache);
-        $config->setAutoGenerateProxyClasses(AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
+        $config->setAutoGenerateProxyClasses((bool) AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
         // if ($debug) {
         //     $config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
         // }
 
         try {
-            $connection = DBAL\DriverManager::getConnection($dbParams, $config);
+            $connection    = DBAL\DriverManager::getConnection($dbParams, $config);
             $entityManager = new ORM\EntityManager($connection, $config);
         } catch (Throwable $e) {
             $msg = sprintf('ERROR (%d): %s', $e->getCode(), $e->getMessage());
