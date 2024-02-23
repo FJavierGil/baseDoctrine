@@ -9,8 +9,9 @@
 
 namespace MiW\DemoDoctrine\Utility;
 
-use Doctrine\Common\Proxy\AbstractProxyFactory;
-use Doctrine\{ORM, DBAL};
+use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\{ EntityManager, EntityManagerInterface, ORMSetup };
+use Doctrine\ORM\Proxy\ProxyFactory;
 use Exception;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Throwable;
@@ -20,16 +21,16 @@ use Throwable;
  */
 final class DoctrineConnector
 {
-    private static ORM\EntityManager | null $instance = null;
+    private static EntityManager|null $instance = null;
 
     /**
      * Generate the Entity Manager
      *
-     * @return ORM\EntityManagerInterface|null
+     * @return EntityManagerInterface|null
      */
-    public static function getEntityManager(): ?ORM\EntityManagerInterface
+    public static function getEntityManager(): ?EntityManagerInterface
     {
-        if (self::$instance instanceof ORM\EntityManager) {
+        if (self::$instance instanceof EntityManager) {
             return self::$instance;
         }
 
@@ -57,26 +58,24 @@ final class DoctrineConnector
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
-        // $debug = $_ENV['DEBUG'] ?? false;
         $queryCache = new PhpFilesAdapter('doctrine_queries');
         // $metadataCache = new PhpFilesAdapter('doctrine_metadata');
         $resultsCache = new PhpFilesAdapter('doctrine_results');
-        $config = ORM\ORMSetup::createAttributeMetadataConfiguration(
-            [ $entityDir ],            // paths to mapped entities
-            true,                      // developper mode
-            (string) ini_get('sys_temp_dir')   // Proxy dir
+        $config = ORMSetup::createAttributeMetadataConfiguration(
+            paths: [ $entityDir ],            // paths to mapped entities
+            isDevMode: true,                  // developper mode
+            proxyDir: ini_get('sys_temp_dir') // Proxy dir
         );
         $config->setQueryCache($queryCache);
         // $config->setMetadataCache($metadataCache);
         $config->setResultCache($resultsCache);
-        $config->setAutoGenerateProxyClasses((bool) AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
-        // if ($debug) {
-        //     $config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
-        // }
+        $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
+
+        // configuring the database connection
+        $connection = DriverManager::getConnection($dbParams, $config);
 
         try {
-            $connection    = DBAL\DriverManager::getConnection($dbParams, $config);
-            $entityManager = new ORM\EntityManager($connection, $config);
+            $entityManager = new EntityManager($connection, $config);
         } catch (Throwable $e) {
             $msg = sprintf('ERROR (%d): %s', $e->getCode(), $e->getMessage());
             fwrite(STDERR, $msg . PHP_EOL);

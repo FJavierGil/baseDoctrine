@@ -2,7 +2,6 @@
 /vendor/
 /phpunit.xml
 /config/*.pem
-/bin/*
 /var
 /*.lock
 .env.local

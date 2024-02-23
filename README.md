@@ -2,7 +2,7 @@ MiW: base Doctrine
 ======================================
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%5E8.0-blue.svg)](http://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%5E8.2-blue.svg)](http://php.net/)
 [![Scrutinizer analysis results](https://scrutinizer-ci.com/g/FJavierGil/baseDoctrine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/FJavierGil/baseDoctrine/?branch=master)
 > 🎯 Proyecto básico con ORM Doctrine y Dotenv
 
@@ -32,12 +32,12 @@ los parámetros:
 Una vez editado el anterior fichero, desde el directorio raíz del proyecto se ejecutarán los comandos:
 ```
 $> composer update
-$> bin/doctrine orm:schema-tool:update --dump-sql --force
+$> php bin/doctrine.php orm:schema-tool:update --dump-sql --force
 ```
 
 Para comprobar la validez de la información de mapeo y la sincronización con la base de datos:
 ```
-$> bin/doctrine orm:validate-schema
+$> php bin/doctrine.php orm:validate-schema
 ```
 
 ## 🗄️ Estructura del proyecto:
@@ -45,9 +45,7 @@ $> bin/doctrine orm:validate-schema
 A continuación se describe el contenido y estructura del proyecto:
 
 * Directorio `bin`:
-    - Ejecutables (*doctrine*)
-* Directorio `config`:
-    - `cli-config.php`: configuración de la consola de comandos de Doctrine CLI
+    - Ejecutables (*doctrine.php*)
 * Directorio `src`:
     - Subdirectorio `src/Entity`: entidades PHP (incluirán **ATRIBUTOS** de mapeo del ORM)
     - Subdirectorio `src/scripts`: scripts de ejemplo
