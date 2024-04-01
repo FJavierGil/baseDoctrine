@@ -9,8 +9,7 @@
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use MiW\DemoDoctrine\Utility\DoctrineConnector;
-use MiW\DemoDoctrine\Utility\Utils;
+use MiW\DemoDoctrine\Utility\{ DoctrineConnector, Utils };
 
 require_once dirname(__DIR__) . "/vendor/autoload.php";
 

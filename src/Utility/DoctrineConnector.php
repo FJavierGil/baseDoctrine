@@ -39,7 +39,8 @@ final class DoctrineConnector
                 $_ENV['DATABASE_NAME'],
                 $_ENV['DATABASE_USER'],
                 $_ENV['DATABASE_PASSWD'],
-                $_ENV['ENTITY_DIR']
+                $_ENV['ENTITY_DIR'],
+                $_ENV['SERVER_VERSION'],
             )
         ) {
             fwrite(STDERR, 'Faltan variables de entorno por definir' . PHP_EOL);
@@ -55,6 +56,7 @@ final class DoctrineConnector
             'password'  => $_ENV['DATABASE_PASSWD'],
             'driver'    => $_ENV['DATABASE_DRIVER'] ?? 'pdo_mysql',
             'charset'   => $_ENV['DATABASE_CHARSET'] ?? 'UTF8',
+            'serverVersion' => $_ENV['SERVER_VERSION'],
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
@@ -64,7 +66,7 @@ final class DoctrineConnector
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: [ $entityDir ],            // paths to mapped entities
             isDevMode: true,                  // developper mode
-            proxyDir: ini_get('sys_temp_dir') // Proxy dir
+            proxyDir: (string) ini_get('sys_temp_dir') // Proxy dir
         );
         $config->setQueryCache($queryCache);
         // $config->setMetadataCache($metadataCache);
@@ -72,6 +74,7 @@ final class DoctrineConnector
         $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
 
         // configuring the database connection
+        /** @var \Doctrine\DBAL\Connection $connection */
         $connection = DriverManager::getConnection($dbParams, $config);
 
         try {
