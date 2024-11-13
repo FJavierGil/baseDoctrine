@@ -9,11 +9,11 @@
 
 namespace MiW\DemoDoctrine\Utility;
 
-use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\{ Connection, DriverManager };
 use Doctrine\ORM\{ EntityManager, EntityManagerInterface, ORMSetup };
 use Doctrine\ORM\Proxy\ProxyFactory;
 use Exception;
-use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
+// use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Throwable;
 
 /**
@@ -60,21 +60,21 @@ final class DoctrineConnector
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];
-        $queryCache = new PhpFilesAdapter('doctrine_queries');
+        // $queryCache = new PhpFilesAdapter('doctrine_queries');
         // $metadataCache = new PhpFilesAdapter('doctrine_metadata');
-        $resultsCache = new PhpFilesAdapter('doctrine_results');
+        // $resultsCache = new PhpFilesAdapter('doctrine_results');
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: [ $entityDir ],            // paths to mapped entities
             isDevMode: true,                  // developper mode
             proxyDir: (string) ini_get('sys_temp_dir') // Proxy dir
         );
-        $config->setQueryCache($queryCache);
+        // $config->setQueryCache($queryCache);
         // $config->setMetadataCache($metadataCache);
-        $config->setResultCache($resultsCache);
+        // $config->setResultCache($resultsCache);
         $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
 
         // configuring the database connection
-        /** @var \Doctrine\DBAL\Connection $connection */
+        /** @var Connection $connection */
         $connection = DriverManager::getConnection($dbParams, $config);
 
         try {
@@ -101,6 +101,6 @@ final class DoctrineConnector
      */
     public function __wakeup()
     {
-        throw new Exception("Cannot unserialize a Singleton.");
+        throw new Exception('Cannot unserialize a Singleton.');
     }
 }
