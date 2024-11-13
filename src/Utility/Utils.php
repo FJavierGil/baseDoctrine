@@ -9,6 +9,7 @@
 
 namespace MiW\DemoDoctrine\Utility;
 
+use Doctrine\ORM\{ EntityManager, Tools\SchemaTool };
 use Dotenv\Dotenv;
 use Throwable;
 
@@ -50,6 +51,33 @@ class Utils
                 $dotenv = Dotenv::createMutable($dir, '.env.local');
                 $dotenv->load();
             }
+
+            // Requiring Variables to be set
+            $dotenv->required([ 'DATABASE_NAME', 'DATABASE_USER', 'DATABASE_PASSWD', 'SERVER_VERSION' ]);
+            $dotenv->required([ 'ENTITY_DIR' ]);
+        } catch (Throwable $e) {
+            fwrite(
+                STDERR,
+                'EXCEPCIÓN: ' . $e->getCode() . ' - ' . $e->getMessage()
+            );
+            exit(1);
+        }
+    }
+
+    /**
+     * Drop & Update database schema
+     *
+     * @return void
+     */
+    public static function updateSchema(): void
+    {
+        try {
+            /** @var EntityManager $e_manager */
+            $e_manager = DoctrineConnector::getEntityManager();
+            $metadata = $e_manager->getMetadataFactory()->getAllMetadata();
+            $sch_tool = new SchemaTool($e_manager);
+            $sch_tool->dropDatabase();
+            $sch_tool->updateSchema($metadata);
         } catch (Throwable $e) {
             fwrite(
                 STDERR,
