@@ -26,9 +26,9 @@ final class DoctrineConnector
     /**
      * Generate the Entity Manager
      *
-     * @return EntityManagerInterface|null
+     * @return EntityManagerInterface
      */
-    public static function getEntityManager(): ?EntityManagerInterface
+    public static function getEntityManager(): EntityManagerInterface
     {
         if (self::$instance instanceof EntityManager) {
             return self::$instance;
@@ -78,14 +78,14 @@ final class DoctrineConnector
         $connection = DriverManager::getConnection($dbParams, $config);
 
         try {
-            $entityManager = new EntityManager($connection, $config);
+            self::$instance = new EntityManager($connection, $config);
         } catch (Throwable $e) {
             $msg = sprintf('ERROR (%d): %s', $e->getCode(), $e->getMessage());
             fwrite(STDERR, $msg . PHP_EOL);
             exit(1);
         }
 
-        return $entityManager;
+        return self::$instance;
     }
 
     protected function __construct()
