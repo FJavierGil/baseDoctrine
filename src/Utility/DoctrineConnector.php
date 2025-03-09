@@ -49,14 +49,14 @@ final class DoctrineConnector
 
         // Cargar configuración de la conexión.
         $dbParams = [
-            'host'      => $_ENV['DATABASE_HOST'] ?? '127.0.0.1',
-            'port'      => $_ENV['DATABASE_PORT'] ?? 3306,
-            'dbname'    => $_ENV['DATABASE_NAME'],
-            'user'      => $_ENV['DATABASE_USER'],
-            'password'  => $_ENV['DATABASE_PASSWD'],
-            'driver'    => $_ENV['DATABASE_DRIVER'] ?? 'pdo_mysql',
-            'charset'   => $_ENV['DATABASE_CHARSET'] ?? 'UTF8',
+            'host'          => $_ENV['DATABASE_HOST'] ?? '127.0.0.1',
+            'port'          => $_ENV['DATABASE_PORT'] ?? 3306,
+            'dbname'        => $_ENV['DATABASE_NAME'],
+            'user'          => $_ENV['DATABASE_USER'],
+            'password'      => $_ENV['DATABASE_PASSWD'],
+            'driver'        => $_ENV['DATABASE_DRIVER'] ?? 'pdo_mysql',
             'serverVersion' => $_ENV['SERVER_VERSION'],
+            'charset'       => $_ENV['DATABASE_CHARSET'] ?? 'UTF8',
         ];
 
         $entityDir = dirname(__DIR__, 2) . '/' . $_ENV['ENTITY_DIR'];

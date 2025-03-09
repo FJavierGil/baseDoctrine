@@ -74,6 +74,7 @@ class Utils
         try {
             /** @var EntityManager $e_manager */
             $e_manager = DoctrineConnector::getEntityManager();
+            $e_manager->clear();
             $metadata = $e_manager->getMetadataFactory()->getAllMetadata();
             $sch_tool = new SchemaTool($e_manager);
             $sch_tool->dropDatabase();
