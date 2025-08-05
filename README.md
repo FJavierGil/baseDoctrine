@@ -2,7 +2,7 @@ MiW: base Doctrine
 ======================================
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%5E8.2-blue.svg)](http://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%5E8.4-blue.svg)](http://php.net/)
 [![Scrutinizer analysis results](https://scrutinizer-ci.com/g/FJavierGil/baseDoctrine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/FJavierGil/baseDoctrine/?branch=master)
 > 🎯 Proyecto básico con ORM Doctrine y Dotenv
 

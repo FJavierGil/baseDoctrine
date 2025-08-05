@@ -8,7 +8,7 @@ tools:
 build:
     environment:
         php:
-            version: 8.2
+            version: 8.4.15
             ini:
                 date.timezone: 'Europe/Madrid'
         mysql: false

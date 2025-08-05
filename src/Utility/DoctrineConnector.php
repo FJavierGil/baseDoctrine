@@ -74,7 +74,6 @@ final class DoctrineConnector
         $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
 
         // configuring the database connection
-        /** @var Connection $connection */
         $connection = DriverManager::getConnection($dbParams, $config);
 
         try {
