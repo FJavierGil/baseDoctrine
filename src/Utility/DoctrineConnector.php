@@ -72,6 +72,7 @@ final class DoctrineConnector
         // $config->setMetadataCache($metadataCache);
         // $config->setResultCache($resultsCache);
         $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS_OR_CHANGED);
+        $config->enableNativeLazyObjects(true);
 
         // configuring the database connection
         $connection = DriverManager::getConnection($dbParams, $config);
