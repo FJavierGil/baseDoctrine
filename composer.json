@@ -3,7 +3,7 @@
     "type": "project",
     "description": "UPM - MiW - Base ORM Doctrine",
     "license": "MIT",
-    "version": "1.7.9",
+    "version": "1.8.0",
     "homepage": "https://miw.etsisi.upm.es/",
     "keywords": ["php", "doctrine-orm", "dotenv"],
     "authors": [

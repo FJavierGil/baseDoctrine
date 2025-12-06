@@ -30,13 +30,17 @@ los parámetros:
 * Configuración del acceso a la base de datos (usuario y contraseña)
 
 Una vez editado el anterior fichero, desde el directorio raíz del proyecto se ejecutarán los comandos:
+```shell
+
+composer update
 ```
-$> composer update
-$> php bin/doctrine.php orm:schema-tool:update --dump-sql --force
+```shell
+
+php bin/doctrine.php orm:schema-tool:update --dump-sql --force
 ```
 
 Para comprobar la validez de la información de mapeo y la sincronización con la base de datos:
-```
+```shell
 $> php bin/doctrine.php orm:validate-schema
 ```
 

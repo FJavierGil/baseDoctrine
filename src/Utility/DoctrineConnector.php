@@ -9,7 +9,7 @@
 
 namespace MiW\DemoDoctrine\Utility;
 
-use Doctrine\DBAL\{ Connection, DriverManager };
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\{ EntityManager, EntityManagerInterface, ORMSetup };
 use Doctrine\ORM\Proxy\ProxyFactory;
 use Exception;
