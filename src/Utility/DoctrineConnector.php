@@ -52,6 +52,7 @@ final class DoctrineConnector
             'host'          => $_ENV['DATABASE_HOST'] ?? '127.0.0.1',
             'port'          => $_ENV['DATABASE_PORT'] ?? 3306,
             'dbname'        => $_ENV['DATABASE_NAME'],
+            'path'          => $_ENV['DATABASE_NAME'],    // sqlite3!
             'user'          => $_ENV['DATABASE_USER'],
             'password'      => $_ENV['DATABASE_PASSWD'],
             'driver'        => $_ENV['DATABASE_DRIVER'] ?? 'pdo_mysql',
