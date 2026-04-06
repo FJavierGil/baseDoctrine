@@ -31,17 +31,15 @@ los parámetros:
 
 Una vez editado el anterior fichero, desde el directorio raíz del proyecto se ejecutarán los comandos:
 ```shell
-
 composer update
 ```
 ```shell
-
 php bin/doctrine.php orm:schema-tool:update --dump-sql --force
 ```
 
 Para comprobar la validez de la información de mapeo y la sincronización con la base de datos:
 ```shell
-$> php bin/doctrine.php orm:validate-schema
+php bin/doctrine.php orm:validate-schema
 ```
 
 ## 🗄️ Estructura del proyecto:
@@ -51,7 +49,7 @@ A continuación se describe el contenido y estructura del proyecto:
 * Directorio `bin`:
     - Ejecutables (*doctrine.php*)
 * Directorio `src`:
-    - Subdirectorio `src/Entity`: entidades PHP (incluirán **ATRIBUTOS** de mapeo del ORM)
+    - Subdirectorio `src/Model`: entidades PHP (incluirán **ATRIBUTOS** de mapeo del ORM)
     - Subdirectorio `src/scripts`: scripts de ejemplo
     - Subdirectorio `src/Utility`: clases DoctrineConnector y Utils (proporcionan el gestor de entidades)
 * Directorio `vendor`:
